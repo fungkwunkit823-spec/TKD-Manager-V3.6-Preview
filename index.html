@@ -442,68 +442,28 @@ startApp();
    }
    finally{loadingClasses=false;$('refreshClasses').disabled=false;$('enrollButton').disabled=false;}
  }
-
-function switchTab(name){
-  if(!confirmDiscardAttendance())return;
-
-  const areaIds = {
-    dashboard: 'dashboardArea',
-    students: 'studentArea',
-    classes: 'classArea',
-    attendance: 'attendanceArea',
-    makeup: 'makeupArea',
-    tuition: 'tuitionArea',
-    reports: 'reportsArea'
-  };
-
-  for(const n of [
-    'dashboard',
-    'students',
-    'classes',
-    'attendance',
-    'makeup',
-    'tuition',
-    'reports'
-  ]){
-    $(areaIds[n]).hidden = n !== name;
-    $(n+'Tab').setAttribute(
-      'aria-selected',
-      String(n === name)
-    );
-  }
-
-  if(name==='classes' && !classesLoaded && !loadingClasses)
-    loadClasses();
-
-  if(name==='attendance')
-    updateAttendanceClassOptions();
-
-  if(name==='makeup')
-    loadMakeupData();
-
-  if(name==='tuition')
-    loadTuitionData();
-
-  if(name==='dashboard')
-    v36LoadDashboard();
-
-  if(name==='reports')
-    v36LoadReports();
-}
-
-
-  if(name==='reports')
-    v36LoadReports();
-}
-
-$('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
-$('reportsTab').addEventListener('click',()=>switchTab('reports'));
-$('studentsTab').addEventListener('click',()=>switchTab('students'));
-$('classesTab').addEventListener('click',()=>switchTab('classes'));
-$('attendanceTab').addEventListener('click',()=>switchTab('attendance'));
-$('makeupTab').addEventListener('click',()=>switchTab('makeup'));
-$('tuitionTab').addEventListener('click',()=>switchTab('tuition'));
-
+ function switchTab(name){
+   if(!confirmDiscardAttendance())return;
+   const areaIds = {
+     dashboard:'dashboardArea',
+     students:'studentArea',
+     classes:'classArea',
+     attendance:'attendanceArea',
+     makeup:'makeupArea',
+     tuition:'tuitionArea',
+     reports:'reportsArea'
+   };
+   for(const n of Object.keys(areaIds)){
+     $(areaIds[n]).hidden = n !== name;
+     $(n+'Tab').setAttribute('aria-selected',String(n === name));
+   }
+   if(name==='classes' && !classesLoaded && !loadingClasses)loadClasses();
+   if(name==='attendance')updateAttendanceClassOptions();
+   if(name==='makeup')loadMakeupData();
+   if(name==='tuition')loadTuitionData();
+   if(name==='dashboard')v36LoadDashboard();
+   if(name==='reports')v36LoadReports();
+ }
  $('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
  $('reportsTab').addEventListener('click',()=>switchTab('reports'));
  $('studentsTab').addEventListener('click',()=>switchTab('students'));
