@@ -491,7 +491,7 @@ function switchTab(name){
     v36LoadReports();
 }
 
-   
+
   if(name==='reports')
     v36LoadReports();
 }
@@ -499,6 +499,10 @@ function switchTab(name){
 $('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
 $('reportsTab').addEventListener('click',()=>switchTab('reports'));
 $('studentsTab').addEventListener('click',()=>switchTab('students'));
+$('classesTab').addEventListener('click',()=>switchTab('classes'));
+$('attendanceTab').addEventListener('click',()=>switchTab('attendance'));
+$('makeupTab').addEventListener('click',()=>switchTab('makeup'));
+$('tuitionTab').addEventListener('click',()=>switchTab('tuition'));
 
  $('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
  $('reportsTab').addEventListener('click',()=>switchTab('reports'));
