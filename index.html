@@ -491,14 +491,15 @@ function switchTab(name){
     v36LoadReports();
 }
 
-   }
-   if(name==='classes' && !classesLoaded && !loadingClasses)loadClasses();
-   if(name==='attendance')updateAttendanceClassOptions();
-   if(name==='makeup')loadMakeupData();
-   if(name==='tuition')loadTuitionData();
-   if(name==='dashboard')v36LoadDashboard();
-   if(name==='reports')v36LoadReports();
- }
+   
+  if(name==='reports')
+    v36LoadReports();
+}
+
+$('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
+$('reportsTab').addEventListener('click',()=>switchTab('reports'));
+$('studentsTab').addEventListener('click',()=>switchTab('students'));
+
  $('dashboardTab').addEventListener('click',()=>switchTab('dashboard'));
  $('reportsTab').addEventListener('click',()=>switchTab('reports'));
  $('studentsTab').addEventListener('click',()=>switchTab('students'));
