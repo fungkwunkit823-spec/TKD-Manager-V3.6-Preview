@@ -442,11 +442,55 @@ startApp();
    }
    finally{loadingClasses=false;$('refreshClasses').disabled=false;$('enrollButton').disabled=false;}
  }
- function switchTab(name){
-   if(!confirmDiscardAttendance())return;
-   for(const n of ['dashboard','students','classes','attendance','makeup','tuition','reports']){
-     $(n+'Area').hidden=n!==name;
-     $(n+'Tab').setAttribute('aria-selected',String(n===name));
+
+function switchTab(name){
+  if(!confirmDiscardAttendance())return;
+
+  const areaIds = {
+    dashboard: 'dashboardArea',
+    students: 'studentArea',
+    classes: 'classArea',
+    attendance: 'attendanceArea',
+    makeup: 'makeupArea',
+    tuition: 'tuitionArea',
+    reports: 'reportsArea'
+  };
+
+  for(const n of [
+    'dashboard',
+    'students',
+    'classes',
+    'attendance',
+    'makeup',
+    'tuition',
+    'reports'
+  ]){
+    $(areaIds[n]).hidden = n !== name;
+    $(n+'Tab').setAttribute(
+      'aria-selected',
+      String(n === name)
+    );
+  }
+
+  if(name==='classes' && !classesLoaded && !loadingClasses)
+    loadClasses();
+
+  if(name==='attendance')
+    updateAttendanceClassOptions();
+
+  if(name==='makeup')
+    loadMakeupData();
+
+  if(name==='tuition')
+    loadTuitionData();
+
+  if(name==='dashboard')
+    v36LoadDashboard();
+
+  if(name==='reports')
+    v36LoadReports();
+}
+
    }
    if(name==='classes' && !classesLoaded && !loadingClasses)loadClasses();
    if(name==='attendance')updateAttendanceClassOptions();
